@@ -1,69 +1,114 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using Common.Logging;
 
 namespace Nabbix
 {
     public interface INabbixAgent
     {
+        void Start();
         void Stop();
+        void RegisterInstance(object instance);
     }
 
     public class NabbixAgent : INabbixAgent
     {
-        public static INabbixAgent Start(string address, int port)
+        private static readonly ILog Log = LogManager.GetLogger(typeof(NabbixAgent));
+
+        private readonly ItemRegistry _registry;
+        private readonly IPAddress _address;
+        private readonly int _port;
+
+        private TcpListener _listener;
+        private CancellationTokenSource _source;
+
+        public NabbixAgent(int port, params object[] instances)
+            : this(null, port, true, instances)
         {
-            NabbixAgent agent = new NabbixAgent();
-
-            IPAddress ipAddress = IPAddress.Parse(address);
-
-            agent.StartListener(ipAddress, port);
-
-            return agent;
         }
 
-        TcpListener listener;
-        CancellationTokenSource source;
-
-        public void Stop()
+        public NabbixAgent(string address, int port, params object[] instances)
+            : this(address, port, true, instances)
         {
-            source.Cancel();
-            listener.Stop();
-            // TODO: Wait until all tasks have stopped.
         }
 
-        // Cancelation token.
-
-        // Create TCP Listener
-        // Create new threads
-        private void StartListener(IPAddress address, int port)
+        public NabbixAgent(string address, int port, bool startImmediately = true, params object[] instances)
+            : this(new ItemRegistry(), address, port, startImmediately)
         {
-            source = new CancellationTokenSource();
-            listener = new TcpListener(port);
-            listener.Start();
+            if (instances == null)
+            {
+                Log.WarnFormat("instances is null");
+                return;
+            }
+
+            foreach (object instance in instances)
+            {
+                RegisterInstance(instance);
+            }
+        }
+
+        public NabbixAgent(ItemRegistry registry, string address, int port, bool startImmediately = true)
+        {
+            _registry = registry;
+            _address = address == null ?
+                IPAddress.Any :
+                IPAddress.Parse(address); ;
+            _port = port;
+
+            if (startImmediately)
+            {
+                Start();
+            }
+        }
+
+        public void Start()
+        {
+            _source = new CancellationTokenSource();
+            _listener = new TcpListener(_address, _port);
+            _listener.Start();
             var thread = new Thread(() =>
             {
 
                 while (true)
                 {
-                    if (source.Token.IsCancellationRequested)
+                    if (_source.Token.IsCancellationRequested)
                     {
                         break;
                     }
 
-                    var client = listener.AcceptTcpClient();
-                    QueryHandler.Run(client);
-
+                    try
+                    {
+                        var client = _listener.AcceptTcpClient();
+                        QueryHandler.Run(client, this._registry);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.ErrorFormat("Error running NabbixAgent.", e);
+                    }
                 }
             });
 
             thread.IsBackground = false;
             thread.Start();
+        }
+        
+        public void Stop()
+        {
+            _source.Cancel();
+            _listener.Stop();
+        }
+
+        public void RegisterInstance(object instance)
+        {
+            if (instance == null)
+            {
+                Log.WarnFormat("instance is null");
+                return;
+            }
+
+            _registry.RegisterInstance(instance);
         }
     }
 }

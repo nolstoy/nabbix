@@ -2,36 +2,35 @@
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 
 namespace Nabbix
 {
     class QueryHandler
     {
-        internal static void Run(TcpClient client)
+        internal static void Run(TcpClient client, ItemRegistry registry)
         {
             var stream = client.GetStream();
 
-            try {
-                do
-                {
-                    String request = GetRequest(stream);
-
-                    String response = new Random().Next().ToString();
-                    if (request == "agent.ping")
-                    {
-                        response = "1";
-                    }
-
-                    // For now the response is always a random integer
-                    SendResponse(stream, response);
-
-                } while (stream.DataAvailable);
-            }
-            catch(Exception e)
+            do
             {
+                string request = GetRequest(stream);
+                request = request.Trim();
 
-            }
+                string response;
+                if (request == "agent.ping")
+                {
+                    response = "1";
+                }
+                else
+                {
+                    response = registry.GetItemValue(request);
+                }
+
+
+                // For now the response is always a random integer
+                SendResponse(stream, response);
+
+            } while (stream.DataAvailable);
         }
 
         private static string GetRequest(NetworkStream stream)
