@@ -24,14 +24,20 @@ namespace Nabbix
         private TcpListener _listener;
         private CancellationTokenSource _source;
 
-        public NabbixAgent(int port, params object[] instances)
-            : this(null, port, true, instances)
+        public NabbixAgent(ItemRegistry registry, string address, int port, bool startImmediately = true)
         {
-        }
+            if (registry == null) throw new ArgumentNullException(nameof(registry));
 
-        public NabbixAgent(string address, int port, params object[] instances)
-            : this(address, port, true, instances)
-        {
+            _registry = registry;
+            _address = address == null
+                ? IPAddress.Any
+                : IPAddress.Parse(address);
+            _port = port;
+
+            if (startImmediately)
+            {
+                Start();
+            }
         }
 
         public NabbixAgent(string address, int port, bool startImmediately = true, params object[] instances)
@@ -49,18 +55,14 @@ namespace Nabbix
             }
         }
 
-        public NabbixAgent(ItemRegistry registry, string address, int port, bool startImmediately = true)
+        public NabbixAgent(int port, params object[] instances)
+            : this(null, port, true, instances)
         {
-            _registry = registry;
-            _address = address == null ?
-                IPAddress.Any :
-                IPAddress.Parse(address); ;
-            _port = port;
+        }
 
-            if (startImmediately)
-            {
-                Start();
-            }
+        public NabbixAgent(string address, int port, params object[] instances)
+            : this(address, port, true, instances)
+        {
         }
 
         public void Start()

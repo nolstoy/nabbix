@@ -7,22 +7,15 @@ namespace Nabbix.ConsoleApp
     {
         private static volatile bool _stopped;
 
-        // http://stackoverflow.com/questions/3365337/best-way-to-generate-a-random-float-in-c-sharp
-        private static float GetRandomFloat(Random random)
-        {
-            var mantissa = random.NextDouble()*2.0 - 1.0;
-            var exponent = Math.Pow(2.0, random.Next(-126, 128));
-
-            return (float) (mantissa*exponent);
-        }
-
         private static void IncrementCounters(SimpleCounters counters)
         {
-            var rand = new Random();
             while (_stopped == false)
             {
                 counters.Increment();
-                counters.Float = GetRandomFloat(rand);
+                counters.FloatExample = RandomGenerator.NextFloat();
+                counters.DoubleExample = RandomGenerator.NextDouble();
+                counters.DecimalExample = RandomGenerator.NextDecimal();
+                counters.StringExample = RandomGenerator.NextString();
                 Thread.Sleep(2000);
             }
         }

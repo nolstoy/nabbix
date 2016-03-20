@@ -7,6 +7,10 @@ namespace Nabbix
     {
         public const string NotSupported = "ZBX_NOTSUPPORTED";
 
+        private readonly PropertyInfo _property;
+        private readonly NabbixItemAttribute _attribute;
+        private readonly object _instance;
+
         public Item(PropertyInfo property, NabbixItemAttribute attribute, object instance)
         {
             if (property == null) throw new ArgumentNullException(nameof(property));
@@ -22,9 +26,5 @@ namespace Nabbix
         {
             return _attribute.GetValue(key, _instance, _property);
         }
-
-        private readonly PropertyInfo _property;
-        private readonly NabbixItemAttribute _attribute;
-        private readonly object _instance;
     }
 }

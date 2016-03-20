@@ -49,10 +49,10 @@ namespace Nabbix
             return builder.ToString();
         }
 
-        private static void SendResponse(NetworkStream stream, String response)
+        private static void SendResponse(NetworkStream stream, string response)
         {
             BufferedStream output = new BufferedStream(stream);
-            //output.WriteByte()
+            
             // Write header
             // https://www.zabbix.com/documentation/1.8/protocols
             // "ZBXD\x01" (5 bytes)
@@ -62,6 +62,7 @@ namespace Nabbix
             output.WriteByte((byte)'D');
             output.WriteByte(1);
 
+            // <DATALEN> - data length (8 bytes). 1 will be formatted as 01/00/00/00/00/00/00/00 (eight bytes in HEX, 64 bit number)
             long length = response.Length;
             for (int i = 0; i < 8; i++)
             {

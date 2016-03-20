@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 
 namespace Nabbix.ConsoleApp
@@ -15,33 +14,43 @@ namespace Nabbix.ConsoleApp
         private readonly object _decimalLockObj = new object();
         private decimal _decimal;
 
+        private readonly object _stringLockObj = new object();
+        private string _string;
+
+        internal void Increment()
+        {
+            Interlocked.Increment(ref _incrementing);
+        }
+
         [NabbixItem("long_example")]
         public long Incrementing => Interlocked.Read(ref _incrementing);
 
         [NabbixItem("float_example")]
-        public float Float
+        public float FloatExample
         {
             get { lock (_floatLockObj) return _float; }
             set { lock (_floatLockObj) _float = value; }
         }
 
         [NabbixItem("double_example")]
-        public double Double
+        public double DoubleExample
         {
             get { lock (_doubleLockObj) return _double; }
             set { lock (_doubleLockObj) _double = value; }
         }
 
         [NabbixItem("decimal_example")]
-        public decimal Decimal
+        public decimal DecimalExample
         {
             get { lock (_decimalLockObj) return _decimal; }
-            set { lock (_doubleLockObj) _decimal = value; }
+            set { lock (_decimalLockObj) _decimal = value; }
         }
 
-        public void Increment()
+        [NabbixItem("string_example")]
+        public string StringExample
         {
-            Interlocked.Increment(ref _incrementing);
+            get { lock (_stringLockObj) return _string; }
+            set { lock (_stringLockObj) _string = value; }
         }
     }
 }
