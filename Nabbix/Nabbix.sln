@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix", "Nabbix.csproj", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.ConsoleApp", "..\Nabbix.Console\Nabbix.ConsoleApp.csproj", "{04307925-07FA-42D0-A1A4-81F5AB643F64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.Tests", "..\Nabbix.Tests\Nabbix.Tests.csproj", "{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{04307925-07FA-42D0-A1A4-81F5AB643F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04307925-07FA-42D0-A1A4-81F5AB643F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04307925-07FA-42D0-A1A4-81F5AB643F64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

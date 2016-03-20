@@ -70,7 +70,6 @@ namespace Nabbix
             _listener.Start();
             var thread = new Thread(() =>
             {
-
                 while (true)
                 {
                     if (_source.Token.IsCancellationRequested)
@@ -81,7 +80,7 @@ namespace Nabbix
                     try
                     {
                         var client = _listener.AcceptTcpClient();
-                        QueryHandler.Run(client, this._registry);
+                        QueryHandler.Run(client, _registry);
                     }
                     catch (Exception e)
                     {
