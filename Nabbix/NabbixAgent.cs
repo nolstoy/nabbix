@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 using Common.Logging;
 
 namespace Nabbix
@@ -23,7 +24,7 @@ namespace Nabbix
 
         private TcpListener _listener;
         private CancellationTokenSource _source;
-
+        private Task _task;
         public NabbixAgent(ItemRegistry registry, string address, int port, bool startImmediately = true)
         {
             if (registry == null) throw new ArgumentNullException(nameof(registry));
@@ -67,38 +68,56 @@ namespace Nabbix
 
         public void Start()
         {
+            Log.Info("Starting NabbixAgent.");
             _source = new CancellationTokenSource();
+            var cancellationToken = _source.Token;
+
             _listener = new TcpListener(_address, _port);
             _listener.Start();
-            var thread = new Thread(() =>
+            
+            _task = Task.Factory.StartNew(() =>
             {
+                Log.Debug("Starting task.");
                 while (true)
                 {
-                    if (_source.Token.IsCancellationRequested)
+                    Log.Debug("Starting while loop.");
+                    if (cancellationToken.IsCancellationRequested)
                     {
+                        Log.Debug("Token cancelled.");
                         break;
                     }
 
                     try
                     {
-                        var client = _listener.AcceptTcpClient();
-                        QueryHandler.Run(client, _registry);
+                        QueryHandler.Run(_listener, _registry);
+                    }
+                    catch (SocketException e)
+                    {
+                        if (cancellationToken.IsCancellationRequested)
+                        {
+                            Log.Debug(e);
+                        }
                     }
                     catch (Exception e)
                     {
                         Log.ErrorFormat("Error running NabbixAgent.", e);
                     }
                 }
-            });
-
-            thread.IsBackground = false;
-            thread.Start();
+            }, cancellationToken);
         }
         
         public void Stop()
         {
-            _source.Cancel();
+            Log.Info("Stopping TCP Listener.");
             _listener.Stop();
+
+            Log.Info("Notifying handler task of cancellation.");
+            _source.Cancel();
+
+            Log.Info("Waiting for task to finish.");
+            _task.Wait();
+
+            Log.Info("Stopped successfully.");
         }
 
         public void RegisterInstance(object instance)
@@ -108,6 +127,8 @@ namespace Nabbix
                 Log.WarnFormat("instance is null");
                 return;
             }
+
+            Log.InfoFormat("Registering instance {0}.", instance.GetType());
 
             _registry.RegisterInstance(instance);
         }

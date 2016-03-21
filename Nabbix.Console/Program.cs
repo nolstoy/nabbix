@@ -37,12 +37,10 @@ namespace Nabbix.ConsoleApp
 
             var thread = IncrementCountersOnBackgroundThread(counters);
             Console.ReadKey();
-            Console.WriteLine("Stopping Counters");
 
             _stopped = true;
             thread.Join();
 
-            Console.WriteLine("Stopping Listener");
             agent.Stop();
         }
     }

@@ -37,6 +37,11 @@ namespace Nabbix
 
         public string GetItemValue(string key)
         {
+            key = key.Trim();
+
+            if (key == "agent.ping")
+                return "1";
+
             Item item;
             if (RegisteredProperties.TryGetValue(key, out item))
             {
