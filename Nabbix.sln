@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix", "Nabbix.csproj", "{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix", "Nabbix\Nabbix.csproj", "{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.ConsoleApp", "..\Nabbix.Console\Nabbix.ConsoleApp.csproj", "{04307925-07FA-42D0-A1A4-81F5AB643F64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.ConsoleApp", "Nabbix.Console\Nabbix.ConsoleApp.csproj", "{04307925-07FA-42D0-A1A4-81F5AB643F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.Tests", "..\Nabbix.Tests\Nabbix.Tests.csproj", "{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.Tests", "Nabbix.Tests\Nabbix.Tests.csproj", "{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
