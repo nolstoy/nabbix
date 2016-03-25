@@ -1,4 +1,5 @@
 using System.Threading;
+using Nabbix.Items;
 
 namespace Nabbix.ConsoleApp
 {
@@ -21,6 +22,9 @@ namespace Nabbix.ConsoleApp
         {
             Interlocked.Increment(ref _incrementing);
         }
+
+        [NabbixFileCountItem("file_count")]
+        public NabbixFileCount Count { get; } = new NabbixFileCount(@"C:\folder");
 
         [NabbixItem("long_example")]
         public long Incrementing => Interlocked.Read(ref _incrementing);

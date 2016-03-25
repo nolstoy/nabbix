@@ -1,6 +1,8 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Reflection;
 using Common.Logging;
+using Nabbix.Items;
 
 namespace Nabbix
 {
@@ -20,18 +22,20 @@ namespace Nabbix
             foreach (PropertyInfo property in instance.GetType().GetProperties())
             {
                 var attribute = property.GetCustomAttribute<NabbixItemAttribute>();
-                attribute?.ZabbixItemKeys.ForEach(key =>
+                if (attribute != null)
                 {
-                    if (key != null)
-                    {
-                        RegisteredProperties.TryAdd(key, new Item(property, attribute, instance));
-                    }
-                    else
-                    {
-                        Log.WarnFormat("NabbixItemAttribute - Missing key for object {0}, {1}", 
-                            instance.GetType(), property.Name);
-                    }
-                });
+                    foreach (var key in attribute.ZabbixItemKeys)
+
+                        if (key != null)
+                        {
+                            RegisteredProperties.TryAdd(key, new Item(property, attribute, instance));
+                        }
+                        else
+                        {
+                            Log.WarnFormat("NabbixItemAttribute - Missing key for object {0}, {1}",
+                                instance.GetType(), property.Name);
+                        }
+                }
             }
         }
 
@@ -45,7 +49,14 @@ namespace Nabbix
             Item item;
             if (RegisteredProperties.TryGetValue(key, out item))
             {
-                return item.GetValue(key);
+                try
+                {
+                    return item.GetValue(key);
+                }
+                catch (Exception e)
+                {
+                    Log.ErrorFormat("Exception occurred querying key {0}", e, key);
+                }
             }
 
             return Item.NotSupported;

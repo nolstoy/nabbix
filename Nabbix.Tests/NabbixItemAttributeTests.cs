@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Nabbix.Attributes;
+using NUnit.Framework;
 
 namespace Nabbix.Tests
 {
