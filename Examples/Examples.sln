@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.ConsoleApp", "Nabbix
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix", "..\Nabbix\Nabbix.csproj", "{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplestExample", "SimplestExample\SimplestExample.csproj", "{F055C4FA-1232-406B-A98E-ACF3002E17E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

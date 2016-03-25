@@ -16,9 +16,11 @@ With Nabbix, monitoring a .Net program only requires referencing a NuGet package
 Install-Package Nabbix
 ```
 
-## 2. Create a class with your counters
+## 2. Create class(es) with the counter(s)
 
 ```
+
+// Class containing a single Zabbix Item 'long_example'
 private class MyCounter
 {
 	private long _incrementing;
@@ -32,12 +34,12 @@ private class MyCounter
 }
 ```
 
-3. Create a Nabbix Agent and register your class.
+##3. Create a Nabbix Agent and register instances of the counter classes.
 
 ```
 private static void Main()
 {
-	// Create the instance of our counter
+	// Create the instance of the counter class with a single Zabbix Item
     var counters = new MyCounter();
             
     // Start the agent.

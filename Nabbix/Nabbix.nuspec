@@ -3,7 +3,7 @@
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
-    <title>Zabbix Embedded Agent</title>
+    <title>Nabbix</title>
     <authors>marksl</authors>
     <owners>marksl</owners>
     <licenseUrl>https://github.com/marksl/nabbix/blob/master/LICENSE.txt</licenseUrl>
