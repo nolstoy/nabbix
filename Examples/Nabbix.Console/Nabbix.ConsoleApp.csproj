@@ -53,7 +53,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nabbix\Nabbix.csproj">
+    <ProjectReference Include="..\..\Nabbix\Nabbix.csproj">
       <Project>{7e4c9b6b-e0a7-4909-b97c-d24d3ee1c477}</Project>
       <Name>Nabbix</Name>
     </ProjectReference>
