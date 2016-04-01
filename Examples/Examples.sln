@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix", "..\Nabbix\Nabbix.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplestExample", "SimplestExample\SimplestExample.csproj", "{F055C4FA-1232-406B-A98E-ACF3002E17E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.Metrics", "..\Nabbix.Metrics\Nabbix.Metrics.csproj", "{5BC5E470-1CB9-422C-8137-F428C529989E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BC5E470-1CB9-422C-8137-F428C529989E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BC5E470-1CB9-422C-8137-F428C529989E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BC5E470-1CB9-422C-8137-F428C529989E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BC5E470-1CB9-422C-8137-F428C529989E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

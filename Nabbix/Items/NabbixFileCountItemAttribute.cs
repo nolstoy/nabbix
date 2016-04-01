@@ -10,7 +10,7 @@ namespace Nabbix.Items
         {
         }
 
-        protected override string GetPropertyValue(object propertyValue)
+        protected override string GetPropertyValue(string key, object propertyValue)
         {
             var fileCount = PropertyHelper.GetType<NabbixFileCount>(propertyValue);
             return fileCount?.GetFileCount().ToString(CultureInfo.InvariantCulture) ?? Item.NotSupported;

@@ -1,5 +1,7 @@
+using System.IO;
 using System.Threading;
 using Nabbix.Items;
+using Nabbix.Metrics.Items;
 
 namespace Nabbix.ConsoleApp
 {
@@ -22,9 +24,6 @@ namespace Nabbix.ConsoleApp
         {
             Interlocked.Increment(ref _incrementing);
         }
-
-        [NabbixFileCountItem("file_count")]
-        public NabbixFileCount Count { get; } = new NabbixFileCount(@"C:\folder");
 
         [NabbixItem("long_example")]
         public long Incrementing => Interlocked.Read(ref _incrementing);
@@ -56,5 +55,14 @@ namespace Nabbix.ConsoleApp
             get { lock (_stringLockObj) return _string; }
             set { lock (_stringLockObj) _string = value; }
         }
+
+        [NabbixDiskSpaceItem("disk_space")]
+        public NabbixDiskSpace Space { get; } = new NabbixDiskSpace(@"C:\");
+
+        [NabbixFileCountItem("file_count")]
+        public NabbixFileCount Count { get; } = new NabbixFileCount(@"C:\git", "*", SearchOption.TopDirectoryOnly);
+
+        [NabbixPerformanceMetricsItem("perfmetrics")]
+        public NabbixPerformanceMetrics PerfMetrics { get; } = new NabbixPerformanceMetrics();
     }
 }

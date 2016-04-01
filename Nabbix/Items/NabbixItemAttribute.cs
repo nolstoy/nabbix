@@ -27,18 +27,7 @@ namespace Nabbix.Items
 
         protected virtual string GetPropertyValue(string key, object propertyValue)
         {
-            return GetPropertyValue(propertyValue);
-        }
-
-        protected virtual string GetPropertyValue(object propertyValue)
-        {
-            if (propertyValue is float)
-                return BaseTypeHelper.GetFloatValue((float)propertyValue);
-            if (propertyValue is double)
-                return BaseTypeHelper.GetDoubleValue((double)propertyValue);
-            if (propertyValue is decimal)
-                return BaseTypeHelper.GetDecimalValue((decimal)propertyValue);
-            return propertyValue.ToString();
+            return BaseTypeHelper.GetPropertyValue(propertyValue);
         }
 
         internal string GetValue(string key, object instance, PropertyInfo propertyInfo)

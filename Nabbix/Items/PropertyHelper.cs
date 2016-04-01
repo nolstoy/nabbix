@@ -1,12 +1,13 @@
-﻿using Common.Logging;
+﻿using System;
+using Common.Logging;
 
 namespace Nabbix.Items
 {
-    internal class PropertyHelper
+    public static class PropertyHelper
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(PropertyHelper));
 
-        internal static T GetType<T>(object propertyValue) where T : class 
+        public static T GetType<T>(object propertyValue) where T : class 
         {
             var propertyType = propertyValue as T;
             if (propertyType == null)
@@ -18,6 +19,17 @@ namespace Nabbix.Items
             }
 
             return null;
+        }
+
+
+        internal static string GetZabbixItem(string prefix, string value)
+        {
+            if (string.IsNullOrWhiteSpace(prefix))
+                throw new ArgumentException("Argument is null or whitespace", nameof(prefix));
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Argument is null or whitespace", nameof(value));
+
+            return prefix + "_" + value;
         }
     }
 }

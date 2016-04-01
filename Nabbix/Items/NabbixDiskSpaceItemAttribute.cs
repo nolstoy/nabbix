@@ -2,21 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using static Nabbix.Items.PropertyHelper;
 
 namespace Nabbix.Items
 {
     public class NabbixDiskSpaceItemAttribute : NabbixItemAttribute
     {
-        private static string GetZabbixItem(string prefix, string value)
-        {
-            if (string.IsNullOrWhiteSpace(prefix))
-                throw new ArgumentException("Argument is null or whitespace", nameof(prefix));
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("Argument is null or whitespace", nameof(value));
-
-            return prefix + value;
-        }
-
         public NabbixDiskSpaceItemAttribute(string zabbixItemPrefix)
             : this(GetZabbixItem(zabbixItemPrefix, "available_freespace"),
                 GetZabbixItem(zabbixItemPrefix, "total_freespace"),
@@ -42,8 +33,9 @@ namespace Nabbix.Items
 
         protected override string GetPropertyValue(string key, object propertyValue)
         {
-            NabbixDriveInfo driveInfo = PropertyHelper.GetType<NabbixDriveInfo>(propertyValue);
-            DriveInfo info = driveInfo.GetDriveInfo();
+            NabbixDiskSpace diskSpace = GetType<NabbixDiskSpace>(propertyValue);
+
+            DriveInfo info = diskSpace?.GetDriveInfo();
             if (info == null)
                 return Item.NotSupported;
 

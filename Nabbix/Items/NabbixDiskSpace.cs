@@ -3,11 +3,11 @@ using System.IO;
 
 namespace Nabbix.Items
 {
-    public class NabbixDriveInfo
+    public class NabbixDiskSpace
     {
         private readonly string _drive;
 
-        public NabbixDriveInfo(string drive)
+        public NabbixDiskSpace(string drive)
         {
             if (string.IsNullOrWhiteSpace(drive))
                 throw new ArgumentException("Argument is null or whitespace", nameof(drive));

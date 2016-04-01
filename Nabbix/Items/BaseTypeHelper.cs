@@ -2,8 +2,30 @@
 
 namespace Nabbix.Items
 {
-    public class BaseTypeHelper
+    public static class BaseTypeHelper
     {
+        public static string GetPropertyValue(object propertyValue)
+        {
+            if (propertyValue is float)
+                return GetFloatValue((float) propertyValue);
+            if (propertyValue is double)
+                return GetDoubleValue((double) propertyValue);
+            if (propertyValue is decimal)
+                return GetDecimalValue((decimal) propertyValue);
+            return propertyValue.ToString();
+        }
+
+        public static string GetPropertyValue(ValueType propertyValue)
+        {
+            if (propertyValue is float)
+                return GetFloatValue((float)propertyValue);
+            if (propertyValue is double)
+                return GetDoubleValue((double)propertyValue);
+            if (propertyValue is decimal)
+                return GetDecimalValue((decimal)propertyValue);
+            return propertyValue.ToString();
+        }
+
         // Not perfect, but it's close to the maximum values of 
         // https://www.zabbix.com/documentation/2.0/manual/config/items/item
 
