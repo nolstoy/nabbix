@@ -1,10 +1,10 @@
-﻿using Nabbix.Attributes;
+﻿using Nabbix.Items;
 using NUnit.Framework;
 
 namespace Nabbix.Tests
 {
     [TestFixture]
-    public class NabbixItemAttributeTests
+    public class BaseTypeHelperTests
     {
         [Test]
         public void GetFloatValue_SizeExceedsMax_ReturnsMaxAllowedValue()
@@ -12,7 +12,7 @@ namespace Nabbix.Tests
             const string maxZabbixMySqlValue    = "990000000000.0000";
             const float exceedsMaxSize          =  999999999999.9999f;
 
-            string result = NabbixItemAttribute.GetFloatValue(exceedsMaxSize);
+            string result = BaseTypeHelper.GetFloatValue(exceedsMaxSize);
             Assert.AreEqual(maxZabbixMySqlValue, result);
         }
 
@@ -22,7 +22,7 @@ namespace Nabbix.Tests
             const string minZabbixMySqlValue    = "-990000000000.0000";
             const float exceedsMinSize          =  -999999999999.9999f;
 
-            string result = NabbixItemAttribute.GetFloatValue(exceedsMinSize);
+            string result = BaseTypeHelper.GetFloatValue(exceedsMinSize);
             Assert.AreEqual(minZabbixMySqlValue, result);
         }
 
@@ -31,7 +31,7 @@ namespace Nabbix.Tests
         {
             const float validSize = 124.99f;
 
-            string result = NabbixItemAttribute.GetFloatValue(validSize);
+            string result = BaseTypeHelper.GetFloatValue(validSize);
             Assert.AreEqual("124.9900", result);
         }
 
@@ -40,7 +40,7 @@ namespace Nabbix.Tests
         {
             const float validSize = 124.99543f;
 
-            string result = NabbixItemAttribute.GetFloatValue(validSize);
+            string result = BaseTypeHelper.GetFloatValue(validSize);
             Assert.AreEqual("124.9954", result);
         }
 
@@ -50,7 +50,7 @@ namespace Nabbix.Tests
             const string maxZabbixMySqlValue    = "999000000000.0000";
             const double exceedsMaxSize         =  999999999999.9999D;
 
-            string result = NabbixItemAttribute.GetDoubleValue(exceedsMaxSize);
+            string result = BaseTypeHelper.GetDoubleValue(exceedsMaxSize);
             Assert.AreEqual(maxZabbixMySqlValue, result);
         }
 
@@ -60,7 +60,7 @@ namespace Nabbix.Tests
             const string minZabbixMySqlValue    = "-999000000000.0000";
             const double exceedsMinSize         =  -999999999999.9999D;
 
-            string result = NabbixItemAttribute.GetDoubleValue(exceedsMinSize);
+            string result = BaseTypeHelper.GetDoubleValue(exceedsMinSize);
             Assert.AreEqual(minZabbixMySqlValue, result);
         }
 
@@ -69,7 +69,7 @@ namespace Nabbix.Tests
         {
             const double validSize = 124.99D;
 
-            string result = NabbixItemAttribute.GetDoubleValue(validSize);
+            string result = BaseTypeHelper.GetDoubleValue(validSize);
             Assert.AreEqual("124.9900", result);
         }
 
@@ -78,7 +78,7 @@ namespace Nabbix.Tests
         {
             const double validSize = 124.99543D;
 
-            string result = NabbixItemAttribute.GetDoubleValue(validSize);
+            string result = BaseTypeHelper.GetDoubleValue(validSize);
             Assert.AreEqual("124.9954", result);
         }
 
@@ -88,7 +88,7 @@ namespace Nabbix.Tests
             const string maxZabbixMySqlValue    = "999000000000.0000";
             const decimal exceedsMaxSize        =  999999999999.9999m;
 
-            string result = NabbixItemAttribute.GetDecimalValue(exceedsMaxSize);
+            string result = BaseTypeHelper.GetDecimalValue(exceedsMaxSize);
             Assert.AreEqual(maxZabbixMySqlValue, result);
         }
 
@@ -98,7 +98,7 @@ namespace Nabbix.Tests
             const string minZabbixMySqlValue    = "-999000000000.0000";
             const decimal exceedsMinSize        =  -999999999999.9999m;
 
-            string result = NabbixItemAttribute.GetDecimalValue(exceedsMinSize);
+            string result = BaseTypeHelper.GetDecimalValue(exceedsMinSize);
             Assert.AreEqual(minZabbixMySqlValue, result);
         }
 
@@ -107,7 +107,7 @@ namespace Nabbix.Tests
         {
             const decimal validSize = 124.99m;
 
-            string result = NabbixItemAttribute.GetDecimalValue(validSize);
+            string result = BaseTypeHelper.GetDecimalValue(validSize);
             Assert.AreEqual("124.9900", result);
         }
 
@@ -116,10 +116,8 @@ namespace Nabbix.Tests
         {
             const decimal validSize = 124.99543m;
 
-            string result = NabbixItemAttribute.GetDecimalValue(validSize);
+            string result = BaseTypeHelper.GetDecimalValue(validSize);
             Assert.AreEqual("124.9954", result);
         }
-
-
     }
 }

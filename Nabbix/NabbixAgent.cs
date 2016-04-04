@@ -46,7 +46,6 @@ namespace Nabbix
         {
             if (instances == null)
             {
-                Log.WarnFormat("instances is null");
                 return;
             }
 

@@ -34,7 +34,6 @@ namespace Nabbix.Items
         protected override string GetPropertyValue(string key, object propertyValue)
         {
             NabbixDiskSpace diskSpace = GetType<NabbixDiskSpace>(propertyValue);
-
             DriveInfo info = diskSpace?.GetDriveInfo();
             if (info == null)
                 return Item.NotSupported;

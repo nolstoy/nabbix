@@ -46,18 +46,25 @@ namespace Nabbix
             if (key == "agent.ping")
                 return "1";
 
-            Item item;
-            if (RegisteredProperties.TryGetValue(key, out item))
+            try
             {
-                try
+                if (WindowsPerformanceCounters.IsCounter(key))
+                {
+                    return WindowsPerformanceCounters.GetNextValue(key);
+                }
+
+                Item item;
+                if (RegisteredProperties.TryGetValue(key, out item))
                 {
                     return item.GetValue(key);
                 }
-                catch (Exception e)
-                {
-                    Log.ErrorFormat("Exception occurred querying key {0}", e, key);
-                }
             }
+            catch (Exception e)
+            {
+                Log.ErrorFormat("Exception occurred querying key {0}", e, key);
+            }
+
+
 
             return Item.NotSupported;
         }

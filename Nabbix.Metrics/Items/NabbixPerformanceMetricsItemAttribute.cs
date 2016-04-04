@@ -19,7 +19,7 @@ namespace Nabbix.Metrics.Items
             mapping.Add("mean_rate", m => m.MeanRate);
             mapping.Add("meter_count", m => m.MeterCount);
 
-            mapping.Add("lastminute_sample_max", m => m.LargeSampleMax);
+            mapping.Add("large_sample_max", m => m.LargeSampleMax);
             mapping.Add("large_sample_mean", m => m.LargeSampleMean);
             mapping.Add("large_sample_min", m => m.LargeSampleMin);
             mapping.Add("large_max", m => m.LargeMax);

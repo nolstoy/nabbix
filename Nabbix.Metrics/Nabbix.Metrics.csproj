@@ -54,6 +54,9 @@
   <ItemGroup>
     <Compile Include="Items\NabbixPerformanceMetrics.cs" />
     <Compile Include="Items\NabbixPerformanceMetricsItemAttribute.cs" />
+    <Compile Include="Items\NabbixSizeMetrics.cs" />
+    <Compile Include="Items\NabbixSizeMetricsItemAttribute.cs" />
+    <Compile Include="PeriodicTaskFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

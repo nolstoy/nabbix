@@ -55,14 +55,5 @@ namespace Nabbix.ConsoleApp
             get { lock (_stringLockObj) return _string; }
             set { lock (_stringLockObj) _string = value; }
         }
-
-        [NabbixDiskSpaceItem("disk_space")]
-        public NabbixDiskSpace Space { get; } = new NabbixDiskSpace(@"C:\");
-
-        [NabbixFileCountItem("file_count")]
-        public NabbixFileCount Count { get; } = new NabbixFileCount(@"C:\git", "*", SearchOption.TopDirectoryOnly);
-
-        [NabbixPerformanceMetricsItem("perfmetrics")]
-        public NabbixPerformanceMetrics PerfMetrics { get; } = new NabbixPerformanceMetrics();
     }
 }
