@@ -18,7 +18,7 @@ namespace Nabbix.Items
                     propertyValue.GetType().Name);
             }
 
-            return null;
+            return propertyType;
         }
 
 

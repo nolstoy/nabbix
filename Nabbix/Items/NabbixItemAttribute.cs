@@ -32,10 +32,13 @@ namespace Nabbix.Items
 
         internal string GetValue(string key, object instance, PropertyInfo propertyInfo)
         {
-            string first = ZabbixItemKeys.First();
-            if (key != first)
+            if (ZabbixItemKeys.Count == 1)
             {
-                throw new ArgumentException($"key is invalid. {key} !- {first}");
+                string first = ZabbixItemKeys.First();
+                if (key != first)
+                {
+                    throw new ArgumentException($"key is invalid. {key} != {first}");
+                }
             }
 
             object propertyValue = propertyInfo.Get(instance);

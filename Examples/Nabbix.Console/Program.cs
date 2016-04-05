@@ -43,12 +43,14 @@ namespace Nabbix.ConsoleApp
             var moreCounters = new AdvancedCounters();
             INabbixAgent agent = new NabbixAgent(10052, counters, moreCounters);
 
+            // 100,000 requests/s for an extended period of time will run out of memory.
+
             if (args.Contains("perf"))
             {
                 Thread[] threads = new Thread[4];
                 for (int i = 0; i < 4; i++)
                 {
-                    threads[i] = IncrementCountersOnBackgroundThread(0, counters, moreCounters);
+                    threads[i] = IncrementCountersOnBackgroundThread(10, counters, moreCounters);
                 }
 
                 Console.ReadKey();
