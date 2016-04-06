@@ -9,7 +9,7 @@
     <licenseUrl>https://github.com/marksl/nabbix/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/marksl/nabbix</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>This package contains a lightweight, embeddable C# Zabbix Agent that responds to Zabbix Passive Checks. It includes advanced monitoring using Metrics.NET
+    <description>This package contains a lightweight, embeddable C# Zabbix Agent that responds to Zabbix Passive Checks. This package also includes support for averages and percentiles using Metrics.NET
     </description>
     <copyright>Copyright 2016</copyright>
     <tags>Zabbix Agent</tags>
