@@ -48,7 +48,16 @@ namespace Nabbix.Metrics.Items
         internal double LastMinute99 => _lastMinute.Percentiles(0.99D)[0];
 
         internal int CurrentlyExecutingCount { get { lock (_lockObj) { return _stopwatches.Count; } } }
-        internal long OldestRequest { get { lock (_lockObj) { return _stopwatches.Values.Select(watch => watch.ElapsedMilliseconds).Max(); } } }
+        internal long OldestRequest {
+            get
+            {
+                lock (_lockObj)
+                {
+                    return _stopwatches.Count == 0 ? 0 
+                        : _stopwatches.Values.Select(watch => watch.ElapsedMilliseconds).Max();
+                }
+            }
+        }
 
         public NabbixPerformanceMetrics()
         {

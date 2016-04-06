@@ -68,10 +68,10 @@ namespace Nabbix.Metrics.Items
         {
             NabbixPerformanceMetrics metrics = PropertyHelper.GetType<NabbixPerformanceMetrics>(propertyValue);
 
-            string completeKey = GetCompleteKey(_zabbixItemPrefix, key);
-
+            key = key.Substring(_zabbixItemPrefix.Length + 1);
             Func<NabbixPerformanceMetrics, ValueType> callback;
-            if (!_itemMapping.TryGetValue(completeKey, out callback)) return Item.NotSupported;
+            if (!_itemMapping.TryGetValue(key, out callback))
+                return Item.NotSupported;
 
             ValueType valueType = callback(metrics);
             return BaseTypeHelper.GetPropertyValue(valueType);

@@ -60,7 +60,7 @@ namespace Nabbix
                 }
             }
             catch (Exception e)
-            {
+            { 
                 Log.ErrorFormat("Exception occurred querying key {0}", e, key);
             }
 
