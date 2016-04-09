@@ -7,6 +7,11 @@ namespace Nabbix.ConsoleApp
     {
         private readonly Random _rand = new Random();
 
+        public int NextInt(int min, int max)
+        {
+            return _rand.Next(min, max);
+        }
+
         internal long NextLong()
         {
             return _rand.Next(1000, 10000);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using Nabbix.Metrics.Items;
 
 namespace Nabbix.ConsoleApp
 {
@@ -23,12 +24,35 @@ namespace Nabbix.ConsoleApp
                 moreCounters.SizeMetrics.Add(random.NextLong());
                 moreCounters.PerfMetrics.Stop(id);
 
-                Thread.Sleep(millisecondsTimeout);
+                if (millisecondsTimeout == -1)
+                {
+                    millisecondsTimeout = random.NextInt(1, 10);
+                }
+                else
+                {
+                    Thread.Sleep(millisecondsTimeout);
+                }
+                
             }
         }
 
+        private static void IncrementPerfMetrics(RandomGenerator random, NabbixPerformanceMetrics perfMetrics)
+        {
+            int min = random.NextInt(10, 50);
+            int max = random.NextInt(51, 1000);
+            while (_stopped == false)
+            {
+                var id = perfMetrics.Start();
+
+                Thread.Sleep(random.NextInt(min, max));
+
+                perfMetrics.Stop(id);
+            }
+        }
+
+
         // ReSharper disable once UseObjectOrCollectionInitializer
-        private static Thread IncrementCountersOnBackgroundThread(int millisecondsTimeout, SimpleCounters counters, AdvancedCounters moreCounters = null)
+        private static Thread IncrementCountersOnBackgroundThread(int millisecondsTimeout, SimpleCounters counters, AdvancedCounters moreCounters)
         {
             var increaseCounters = new Thread(() => IncrementCounters(new RandomGenerator(), millisecondsTimeout, counters, moreCounters));
             increaseCounters.IsBackground = true;
@@ -36,6 +60,17 @@ namespace Nabbix.ConsoleApp
 
             return increaseCounters;
         }
+
+        // ReSharper disable once UseObjectOrCollectionInitializer
+        private static Thread IncrementPerfMetricsOnBackgroundThread(NabbixPerformanceMetrics perfMetrics)
+        {
+            var increaseCounters = new Thread(() => IncrementPerfMetrics(new RandomGenerator(), perfMetrics));
+            increaseCounters.IsBackground = true;
+            increaseCounters.Start();
+
+            return increaseCounters;
+        }
+
 
         private static void Main(string[] args)
         {
@@ -45,27 +80,28 @@ namespace Nabbix.ConsoleApp
 
             // 100,000 requests/s for an extended period of time will run out of memory.
 
+            const int numThreads = 16;
+            Thread[] threads = new Thread[numThreads];
+
             if (args.Contains("perf"))
             {
-                Thread[] threads = new Thread[4];
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < numThreads; i++)
                 {
                     threads[i] = IncrementCountersOnBackgroundThread(10, counters, moreCounters);
                 }
-
-                Console.ReadKey();
-                _stopped = true;
-                foreach (var thread in threads)
+            }
+            else if (args.Contains("perf2"))
+            {
+                for (int i = 0; i < numThreads; i++)
                 {
-                    thread.Join();
+                    threads[i] = IncrementPerfMetricsOnBackgroundThread(moreCounters.PerfMetrics);
                 }
             }
-            else
-            {
-                Thread thread = IncrementCountersOnBackgroundThread(2000, counters);
-                Console.ReadKey();
 
-                _stopped = true;
+            Console.ReadKey();
+            _stopped = true;
+            foreach (var thread in threads)
+            {
                 thread.Join();
             }
 

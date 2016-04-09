@@ -19,27 +19,16 @@ namespace Nabbix.Metrics.Items
             mapping.Add("mean_rate", m => m.MeanRate);
             mapping.Add("meter_count", m => m.MeterCount);
 
-            mapping.Add("large_sample_max", m => m.LargeSampleMax);
-            mapping.Add("large_sample_mean", m => m.LargeSampleMean);
-            mapping.Add("large_sample_min", m => m.LargeSampleMin);
-            mapping.Add("large_max", m => m.LargeMax);
-            mapping.Add("large_mean", m => m.LargeMean);
-            mapping.Add("large_min", m => m.LargeMin);
-            mapping.Add("large_75", m => m.Large75);
-            mapping.Add("large_90", m => m.Large90);
-            mapping.Add("large_95", m => m.Large95);
-            mapping.Add("large_99", m => m.Large99);
-
-            mapping.Add("lastminute_sample_max", m => m.LastMinuteSampleMax);
-            mapping.Add("lastminute_sample_mean", m => m.LastMinuteSampleMean);
-            mapping.Add("lastminute_sample_min", m => m.LastMinuteSampleMin);
-            mapping.Add("lastminute_max", m => m.LastMinuteMax);
-            mapping.Add("lastminute_mean", m => m.LastMinuteMean);
-            mapping.Add("lastminute_min", m => m.LastMinuteMin);
-            mapping.Add("lastminute_75", m => m.LastMinute75);
-            mapping.Add("lastminute_90", m => m.LastMinute90);
-            mapping.Add("lastminute_95", m => m.LastMinute95);
-            mapping.Add("lastminute_99", m => m.LastMinute99);
+            mapping.Add("sample_max", m => m.SampleMax);
+            mapping.Add("sample_mean", m => m.SampleMean);
+            mapping.Add("sample_min", m => m.SampleMin);
+            mapping.Add("max", m => m.Max);
+            mapping.Add("mean", m => m.Mean);
+            mapping.Add("min", m => m.Min);
+            mapping.Add("percentile_75", m => m.Percentile75);
+            mapping.Add("percentile_90", m => m.Percentile90);
+            mapping.Add("percentile_95", m => m.Percentile95);
+            mapping.Add("percentile_99", m => m.Percentile99);
 
             mapping.Add("currently_executing_count", m => m.CurrentlyExecutingCount);
             mapping.Add("oldest_request", m => m.OldestRequest);
