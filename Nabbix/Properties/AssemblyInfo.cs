@@ -7,6 +7,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: ComVisible(false)]
 [assembly: Guid("7e4c9b6b-e0a7-4909-b97c-d24d3ee1c477")]
-[assembly: AssemblyVersion("0.1.5.0")]
-[assembly: AssemblyFileVersion("0.1.5.0")]
+[assembly: AssemblyVersion("0.1.6.0")]
+[assembly: AssemblyFileVersion("0.1.6.0")]
 [assembly: InternalsVisibleTo("Nabbix.Tests")]
