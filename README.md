@@ -54,6 +54,6 @@ private static void Main()
 }
 ```
 
-# More?
+# More information?
 
 https://github.com/marksl/nabbix/wiki
