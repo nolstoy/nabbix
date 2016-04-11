@@ -53,3 +53,7 @@ private static void Main()
     agent.Stop();
 }
 ```
+
+# More?
+
+https://github.com/marksl/nabbix/wiki
