@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix", "Nabbix\Nabbix.csproj", "{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.Tests", "Nabbix.Tests\Nabbix.Tests.csproj", "{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.Metrics", "Nabbix.Metrics\Nabbix.Metrics.csproj", "{5BC5E470-1CB9-422C-8137-F428C529989E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BC5E470-1CB9-422C-8137-F428C529989E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BC5E470-1CB9-422C-8137-F428C529989E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BC5E470-1CB9-422C-8137-F428C529989E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BC5E470-1CB9-422C-8137-F428C529989E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
