@@ -1,12 +1,17 @@
-﻿using System;
+﻿
+
+using System;
+#if NET45
 using System.Collections.Generic;
 using System.Diagnostics;
 using Nabbix.Items;
+#endif
 
 namespace Nabbix
 {
     internal class WindowsPerformanceCounters
     {
+#if NET45        
         private static readonly Dictionary<string, PerformanceCounter> Counters = new Dictionary<string, PerformanceCounter>();
 
         internal static bool IsCounter(string key)
@@ -56,5 +61,16 @@ namespace Nabbix
             string instance = key.Substring(instanceStart + 1, instanceEnd - instanceStart - 1);
             return new PerformanceCounter(category, counterName, instance, readOnly);
         }
+    #else
+        internal static bool IsCounter(string key)
+        {
+            return false;
+        }
+
+        internal static string GetNextValue(string key)
+        {
+            throw new NotSupportedException();
+        }
+    #endif
     }
 }

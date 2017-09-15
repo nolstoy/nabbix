@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
+﻿#if NET45
+using Xunit;
 
 namespace Nabbix.Tests
 {
     public class WindowsPerformanceCountersTests
     {
-        [Test]
+        [Fact]
         public void MethodName_StateUnderTest_ExpectedBehavior()
         {
             var counterA = WindowsPerformanceCounters.ParseCounter(@"perf_counter[""\Processor Information(_Total)\% Processor Time""]");
@@ -16,4 +17,4 @@ namespace Nabbix.Tests
 
     }
 }
- 
+#endif
