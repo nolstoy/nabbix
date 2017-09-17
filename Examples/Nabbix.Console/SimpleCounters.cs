@@ -1,7 +1,5 @@
-using System.IO;
 using System.Threading;
 using Nabbix.Items;
-using Nabbix.Metrics.Items;
 
 namespace Nabbix.ConsoleApp
 {

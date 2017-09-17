@@ -54,10 +54,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Nabbix.Metrics\Nabbix.Metrics.csproj">
-      <Project>{5bc5e470-1cb9-422c-8137-f428c529989e}</Project>
-      <Name>Nabbix.Metrics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Nabbix\Nabbix.csproj">
       <Project>{7e4c9b6b-e0a7-4909-b97c-d24d3ee1c477}</Project>
       <Name>Nabbix</Name>

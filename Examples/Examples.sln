@@ -1,17 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.ConsoleApp", "Nabbix.Console\Nabbix.ConsoleApp.csproj", "{04307925-07FA-42D0-A1A4-81F5AB643F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix", "..\Nabbix\Nabbix.csproj", "{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabbix", "..\Nabbix\Nabbix.csproj", "{7E4C9B6B-E0A7-4909-B97C-D24D3EE1C477}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplestExample", "SimplestExample\SimplestExample.csproj", "{F055C4FA-1232-406B-A98E-ACF3002E17E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.Metrics", "..\Nabbix.Metrics\Nabbix.Metrics.csproj", "{5BC5E470-1CB9-422C-8137-F428C529989E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nabbix.Tests", "..\Nabbix.Tests\Nabbix.Tests.csproj", "{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nabbix.Tests", "..\Nabbix.Tests\Nabbix.Tests.csproj", "{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F055C4FA-1232-406B-A98E-ACF3002E17E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BC5E470-1CB9-422C-8137-F428C529989E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BC5E470-1CB9-422C-8137-F428C529989E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BC5E470-1CB9-422C-8137-F428C529989E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BC5E470-1CB9-422C-8137-F428C529989E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FCDCBEB-68D6-43BD-BE7B-71099765AD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEF4CE05-8104-4768-A3BC-B1686FDFFAD7}
 	EndGlobalSection
 EndGlobal

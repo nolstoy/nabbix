@@ -1,5 +1,4 @@
 ﻿using Nabbix.Items;
-using Nabbix.Metrics.Items;
 
 namespace Nabbix.ConsoleApp
 {
@@ -13,11 +12,5 @@ namespace Nabbix.ConsoleApp
 
         [NabbixFileCountItem("csharp_files")]
         public NabbixFileCount NabbixFiles { get; } = new NabbixFileCount(@"C:\git\nabbix", "*.cs");
-
-        [NabbixPerformanceMetricsItem("perf")]
-        public NabbixPerformanceMetrics PerfMetrics { get; } = new NabbixPerformanceMetrics();
-
-        [NabbixSizeMetricsItem("size")]
-        public NabbixSizeMetrics SizeMetrics { get; } = new NabbixSizeMetrics();
     }
 }
