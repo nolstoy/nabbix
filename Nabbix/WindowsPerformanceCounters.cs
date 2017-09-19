@@ -9,17 +9,17 @@ using Nabbix.Items;
 
 namespace Nabbix
 {
-    internal class WindowsPerformanceCounters
+    public class WindowsPerformanceCounters
     {
 #if NET45        
         private static readonly Dictionary<string, PerformanceCounter> Counters = new Dictionary<string, PerformanceCounter>();
 
-        internal static bool IsCounter(string key)
+        public static bool IsCounter(string key)
         {
             return key.StartsWith("perf_counter");
         }
 
-        internal static string GetNextValue(string key)
+        public static string GetNextValue(string key)
         {
             PerformanceCounter counter;
             if (!Counters.TryGetValue(key, out counter))
@@ -32,7 +32,7 @@ namespace Nabbix
         }
 
         // https://www.zabbix.com/documentation/1.8/manual/config/windows_performance_counters
-        internal static PerformanceCounter ParseCounter(string key)
+        public static PerformanceCounter ParseCounter(string key)
         {
             int start = key.IndexOf('"');
             int end = key.LastIndexOf('"');
@@ -62,12 +62,12 @@ namespace Nabbix
             return new PerformanceCounter(category, counterName, instance, readOnly);
         }
     #else
-        internal static bool IsCounter(string key)
+        public static bool IsCounter(string key)
         {
             return false;
         }
 
-        internal static string GetNextValue(string key)
+        public static string GetNextValue(string key)
         {
             throw new NotSupportedException();
         }

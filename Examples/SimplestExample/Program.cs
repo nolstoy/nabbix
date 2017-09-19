@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Nabbix;
+using Nabbix.Items;
 
 namespace SimplestExample
 {

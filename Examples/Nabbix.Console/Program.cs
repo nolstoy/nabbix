@@ -12,7 +12,7 @@ namespace Nabbix.ConsoleApp
         {
             while (_stopped == false)
             {
-                counters.Increment();
+                counters.Increment();   
                 counters.FloatExample = random.NextFloat();
                 counters.DoubleExample = random.NextDouble();
                 counters.DecimalExample = random.NextDecimal();
