@@ -1,8 +1,7 @@
 
 
 IF %1.==. GOTO Missing
-NuGet.exe push Nabbix.%1.nupkg
-NuGet.exe push Nabbix.%1.symbols.nupkg
+dotnet nuget push .\bin\release\Nabbix.%1.nupkg -s https://nuget.org
 GOTO End
 
 :Missing
