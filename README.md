@@ -56,4 +56,4 @@ private static void Main()
 
 # More information?
 
-https://github.com/marksl/nabbix/wiki
+https://github.com/nolstoy/nabbix/wiki
