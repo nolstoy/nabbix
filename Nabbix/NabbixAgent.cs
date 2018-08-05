@@ -25,6 +25,15 @@ namespace Nabbix
         private TcpListener _listener;
         private CancellationTokenSource _source;
         private Task _task;
+
+        public int LocalEndpointPort
+        {
+            get
+            {
+                return ((IPEndPoint)_listener.LocalEndpoint).Port;
+            }
+        }
+
         public NabbixAgent(ItemRegistry registry, string address, int port, bool startImmediately = true)
         {
             if (registry == null) throw new ArgumentNullException(nameof(registry));
