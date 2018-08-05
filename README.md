@@ -1,4 +1,4 @@
-[![nolstoy-packages MyGet Build Status](https://www.myget.org/BuildSource/Badge/nolstoy-packages?identifier=96e0f973-0095-4da0-914d-7c8ccebfde05)](https://www.myget.org/)
+[![nolstoy-packages MyGet Build Status](https://www.myget.org/BuildSource/Badge/nolstoy-packages?identifier=96e0f973-0095-4da0-914d-7c8ccebfde05)](https://www.myget.org/feed/nolstoy-packages/package/nuget/Nabbix)
 
 # What?
 
