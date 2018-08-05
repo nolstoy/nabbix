@@ -58,12 +58,10 @@ namespace Nabbix
             Log.Debug("Response sent.");
         }
 
-        internal static void Run(TcpListener listener, ItemRegistry registry)
+        internal static void Run(TcpClient client, ItemRegistry registry)
         {
             Log.Debug("Run... .");
-            var client = listener.AcceptTcpClient();
 
-            Log.Debug("TcpClient Accepted.");
             var stream = client.GetStream();
             do
             {

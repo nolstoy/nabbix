@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Threading.Tasks;
 using Common.Logging;
 
 namespace Nabbix
@@ -24,7 +23,6 @@ namespace Nabbix
 
         private TcpListener _listener;
         private CancellationTokenSource _source;
-        private Task _task;
 
         public int LocalEndpointPort
         {
@@ -78,52 +76,61 @@ namespace Nabbix
         {
             Log.Info("Starting NabbixAgent.");
             _source = new CancellationTokenSource();
-            var cancellationToken = _source.Token;
 
             _listener = new TcpListener(_address, _port);
             _listener.Start();
-            
-            _task = Task.Factory.StartNew(() =>
-            {
-                Log.Debug("Starting task.");
-                while (true)
-                {
-                    Log.Debug("Starting while loop.");
-                    if (cancellationToken.IsCancellationRequested)
-                    {
-                        Log.Debug("Token cancelled.");
-                        break;
-                    }
 
-                    try
-                    {
-                        QueryHandler.Run(_listener, _registry);
-                    }
-                    catch (SocketException e)
-                    {
-                        if (cancellationToken.IsCancellationRequested)
-                        {
-                            Log.Debug(e);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Log.ErrorFormat("Error running NabbixAgent.", e);
-                    }
-                }
-            }, cancellationToken);
+            _listener.BeginAcceptTcpClient(ProcessRequest, _listener);
         }
-        
+
+        private void ProcessRequest(IAsyncResult ar)
+        {
+            if (_source.Token.IsCancellationRequested)
+            {
+                return;
+            }
+
+            if (!(ar.AsyncState is TcpListener listener))
+            {
+                Log.Debug("TcpLister is Null. This is impossible");
+                return;
+            }
+
+            if (_source.Token.IsCancellationRequested)
+            {
+                Log.Debug("Token is already cancelled");
+                return;
+            }
+
+            listener.BeginAcceptTcpClient(ProcessRequest, listener);
+
+            try
+            {
+                using (TcpClient client = listener.EndAcceptTcpClient(ar))
+                {
+                    QueryHandler.Run(client, _registry);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error("Error in QueryHandler Run", e);
+            }
+        }
+
         public void Stop()
         {
-            Log.Info("Stopping TCP Listener.");
-            _listener.Stop();
+            if (_source.Token.IsCancellationRequested)
+            {
+                Log.Debug("Cancellation has already been requested.");
+                return;
+            }
 
-            Log.Info("Notifying handler task of cancellation.");
+            Log.Info("Stopping TCP connections.");
             _source.Cancel();
 
-            Log.Info("Waiting for task to finish.");
-            _task.Wait();
+            Thread.Sleep(100);
+            Log.Info("Stopping TCP Listener.");
+            _listener.Stop();
 
             Log.Info("Stopped successfully.");
         }
