@@ -1,7 +1,8 @@
-|  |  |
-| ------ | ------ |
-| Build | [![nolstoy-packages MyGet Build Status](https://www.myget.org/BuildSource/Badge/nolstoy-packages?identifier=96e0f973-0095-4da0-914d-7c8ccebfde05)](https://www.myget.org/feed/nolstoy-packages/package/nuget/Nabbix) |
-| Download | ![Nuget](https://img.shields.io/nuget/v/Nabbix.svg) |
+[![nolstoy-packages MyGet Build Status](https://www.myget.org/BuildSource/Badge/nolstoy-packages?identifier=96e0f973-0095-4da0-914d-7c8ccebfde05)](https://www.myget.org/feed/nolstoy-packages/package/nuget/Nabbix)
+
+[![Nuget download](https://img.shields.io/nuget/v/Nabbix.svg)](https://www.nuget.org/packages/Nabbix/) 
+
+[![Nuget download](https://img.shields.io/nuget/dt/Nabbix.svg)](https://www.nuget.org/packages/Nabbix/) 
 
 # What?
 
