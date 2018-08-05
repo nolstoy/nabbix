@@ -1,3 +1,5 @@
+[![nolstoy-packages MyGet Build Status](https://www.myget.org/BuildSource/Badge/nolstoy-packages?identifier=96e0f973-0095-4da0-914d-7c8ccebfde05)](https://www.myget.org/)
+
 # What?
 
 A lightweight Zabbix Agent that can be embedded in any .Net program ~ ASP.Net, Windows Service or Console Applications.
