@@ -34,7 +34,7 @@ private class MyCounter
 }
 ```
 
-##3. Create a Nabbix Agent and register instances of the counter classes.
+## 3. Create a Nabbix Agent and register instances of the counter classes.
 
 ```
 private static void Main()

@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>0.1.9.0</Version>
-    <AssemblyVersion>0.1.8.0</AssemblyVersion>
-    <PackageLicenseUrl>https://github.com/marksl/nabbix/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/marksl/nabbix</PackageProjectUrl>
+    <Version>$(PackageVersion)</Version>
+    <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
+    <PackageLicenseUrl>https://github.com/nolstoy/nabbix/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nolstoy/nabbix</PackageProjectUrl>
     <Description>This package contains a lightweight, embeddable C# Zabbix Agent that responds to Zabbix Passive Checks.</Description>
-    <RepositoryUrl>https://github.com/marksl/nabbix</RepositoryUrl>
-    <FileVersion>0.1.8.0</FileVersion>
+    <RepositoryUrl>https://github.com/nolstoy/nabbix</RepositoryUrl>
+    <FileVersion>$(PackageVersion)</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Common.Logging" Version="3.4.1" />
