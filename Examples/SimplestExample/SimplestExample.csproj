@@ -47,8 +47,8 @@
       <HintPath>..\packages\Fasterflect.Netstandard.1.0.8\lib\net45\Fasterflect.Netstandard.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Nabbix, Version=0.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nabbix.0.1.8\lib\net45\Nabbix.dll</HintPath>
+    <Reference Include="Nabbix, Version=0.2.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nabbix.0.2.4\lib\net45\Nabbix.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
