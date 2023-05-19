@@ -1,32 +1,30 @@
-﻿
-
-using System;
-#if NET45
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Nabbix.Items;
-#endif
 
 namespace Nabbix
 {
     public class WindowsPerformanceCounters
     {
-#if NET45        
         private static readonly Dictionary<string, PerformanceCounter> Counters = new Dictionary<string, PerformanceCounter>();
 
         public static bool IsCounter(string key)
         {
-            return key.StartsWith("perf_counter");
+            return IsWindows() && key.StartsWith("perf_counter");
         }
 
         public static string GetNextValue(string key)
         {
+            if (!IsWindows()) throw new NotSupportedException();
+
             PerformanceCounter counter;
             if (!Counters.TryGetValue(key, out counter))
             {
                 counter = ParseCounter(key);
                 Counters.Add(key, counter);
             }
+
             float value = counter.NextValue();
             return BaseTypeHelper.GetFloatValue(value);
         }
@@ -34,6 +32,8 @@ namespace Nabbix
         // https://www.zabbix.com/documentation/1.8/manual/config/windows_performance_counters
         public static PerformanceCounter ParseCounter(string key)
         {
+            if (!IsWindows()) throw new NotSupportedException();
+
             int start = key.IndexOf('"');
             int end = key.LastIndexOf('"');
             int middle = key.LastIndexOf('\\');
@@ -61,16 +61,16 @@ namespace Nabbix
             string instance = key.Substring(instanceStart + 1, instanceEnd - instanceStart - 1);
             return new PerformanceCounter(category, counterName, instance, readOnly);
         }
-    #else
-        public static bool IsCounter(string key)
-        {
-            return false;
-        }
 
-        public static string GetNextValue(string key)
+        private static bool IsWindows()
         {
-            throw new NotSupportedException();
+            OperatingSystem os = Environment.OSVersion;
+            PlatformID pid = os.Platform;
+
+            return pid == PlatformID.Win32S ||
+                   pid == PlatformID.Win32Windows ||
+                   pid == PlatformID.Win32NT ||
+                   pid == PlatformID.WinCE;
         }
-    #endif
     }
 }

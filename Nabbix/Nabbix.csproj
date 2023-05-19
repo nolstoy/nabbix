@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <Version>$(PackageVersion)</Version>
     <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
     <PackageLicenseUrl>https://github.com/nolstoy/nabbix/blob/master/LICENSE.txt</PackageLicenseUrl>
@@ -13,8 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Common.Logging" Version="3.4.1" />
     <PackageReference Include="Fasterflect.Netstandard" Version="1.0.8" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.5.0" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
-    <DefineConstants>NET45</DefineConstants>
-  </PropertyGroup>
 </Project>
