@@ -1,4 +1,4 @@
-﻿#if NET45
+﻿using System.Diagnostics;
 using Xunit;
 
 namespace Nabbix.Tests
@@ -8,13 +8,13 @@ namespace Nabbix.Tests
         [Fact]
         public void MethodName_StateUnderTest_ExpectedBehavior()
         {
-            var counterA = WindowsPerformanceCounters.ParseCounter(@"perf_counter[""\Processor Information(_Total)\% Processor Time""]");
-            var counterB = WindowsPerformanceCounters.ParseCounter(@"perf_counter[""\Memory\Available Bytes""]");
+            PerformanceCounter counterA = WindowsPerformanceCounters.ParseCounter(
+                @"perf_counter[""\Processor Information(_Total)\% Processor Time""]");
+            PerformanceCounter counterB = WindowsPerformanceCounters.ParseCounter(
+                @"perf_counter[""\Memory\Available Bytes""]");
 
-            Assert.IsNotNull(counterA);
-            Assert.IsNotNull(counterB);
+            Assert.True(counterA != null);
+            Assert.True(counterB != null);
         }
-
     }
 }
-#endif
