@@ -18,6 +18,9 @@ namespace Nabbix.Tests
         private const string FakeZabbixHeader = "ZBXD1";
         private const string MediumSizedKey = "hello world";
 
+        private const string LongKey =
+            "In cyberspace where lines of code do dwell, /A timeless phrase in bytes and bits unfurled, /It whispers softly, breaking coder's spell, /The universal hymn: \"Hello, World!\"/From languages diverse, its voice resounds, /In Python's embrace or C's stern gaze, /In Java's tortuous syntax, or HTML's bounds, /In every tongue, its message finds its ways. /In but a single line, its tale is told, /A greeting, a beginning, and a sign, /In zeroes and ones, its truth behold, /A spark ignites, a code divine. //So let it ring in every realm unfurled, /The programmer's anthem: \"Hello, World!\"";
+
         public NabbixAgentTests()
         {
             _agent = new NabbixAgent("127.0.0.1", 0, new MyCounter());
@@ -52,6 +55,9 @@ namespace Nabbix.Tests
 
             [NabbixItem(MediumSizedKey)]
             public long MediumSizedKeyReturn => 1234;
+
+            [NabbixItem(LongKey)]
+            public long LongSizedKeyPattern => 1234;
             // ReSharper enable UnusedMember.Local
 
         }
@@ -103,6 +109,7 @@ namespace Nabbix.Tests
         [InlineData(true, FourCharacterKey)]
         [InlineData(true, FiveCharacterKey)]
         [InlineData(true, FakeZabbixHeader)]
+        [InlineData(true, LongKey)]
         [InlineData(false, MediumSizedKey)]
         [InlineData(false, OneCharacterKey)]
         [InlineData(false, TwoCharacterKey)]
@@ -110,6 +117,7 @@ namespace Nabbix.Tests
         [InlineData(false, FourCharacterKey)]
         [InlineData(false, FiveCharacterKey)]
         [InlineData(false, FakeZabbixHeader)]
+        [InlineData(false, LongKey)]
         public void Integration_OneConnection_SendReceiveResults(bool useOldProtocol, string key)
         {
             var port = _agent.LocalEndpointPort;
