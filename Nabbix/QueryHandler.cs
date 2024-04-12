@@ -32,18 +32,15 @@ namespace Nabbix
 
             var oldProtocol = false;
             var bytes = new List<byte>();
-            int oneByte;
+            int currentByte;
             do
             {
-                oneByte = stream.ReadByte();
-                bytes.Add((byte) oneByte);
+                currentByte = stream.ReadByte();
+                bytes.Add((byte) currentByte);
 
-                if(oldProtocol && (bytes.Count >= 32 || oneByte == 10))
-                    return Encoding.ASCII.GetString(bytes.ToArray());
-
-                if (bytes.Count == Header.Length)
+                if (bytes.Count <= Header.Length)
                 {
-                    if (!bytes.Take(Header.Length).SequenceEqual(Header))
+                    if (!bytes.Take(bytes.Count).SequenceEqual(Header.Take(bytes.Count)))
                         oldProtocol = true;
                 }
                 else if (bytes.Count == Header.Length + lengthSize)
@@ -58,7 +55,11 @@ namespace Nabbix
 
                     return dataString;
                 }
-            } while (oneByte != -1);
+
+                if(oldProtocol && (bytes.Count >= 32 || currentByte == 10))
+                    return Encoding.ASCII.GetString(bytes.ToArray());
+            }
+            while (currentByte != -1);
 
             return "ZBX_INVALID_DATA_ERR"; // never occurs i think
         }

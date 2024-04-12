@@ -6,7 +6,7 @@ namespace Nabbix.Tests
     public class WindowsPerformanceCountersTests
     {
         [Fact]
-        public void MethodName_StateUnderTest_ExpectedBehavior()
+        public void ParseCounter_HappyPath_NonNullReturn()
         {
             PerformanceCounter counterA = WindowsPerformanceCounters.ParseCounter(
                 @"perf_counter[""\Processor Information(_Total)\% Processor Time""]");
