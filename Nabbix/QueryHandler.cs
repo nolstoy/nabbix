@@ -56,7 +56,7 @@ namespace Nabbix
                     return dataString;
                 }
 
-                if(oldProtocol && (bytes.Count >= 32 || currentByte == 10))
+                if(oldProtocol && currentByte == 10)
                     return Encoding.ASCII.GetString(bytes.ToArray());
             }
             while (currentByte != -1);
